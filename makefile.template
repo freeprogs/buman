@@ -1,0 +1,107 @@
+
+# This file is a part of __PROGRAM_NAME__ __PROGRAM_VERSION__
+#
+# This file installs __PROGRAM_NAME__ in the operating system, cleans
+# temporary files and directory in the project.
+#
+# __PROGRAM_COPYRIGHT__ __PROGRAM_AUTHOR__ __PROGRAM_AUTHOR_EMAIL__
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Names section
+
+PROG = __PROGRAM_NAME__
+
+TARGET_PYTHON_SCRIPT = __PROGRAM_NAME__.py
+
+TARGET_README = README
+TARGET_NEWS = NEWS
+TARGET_LICENSE = LICENSE
+
+
+# Build section
+
+M4 = m4 -P
+M4DIR = m4
+
+SELF = Makefile
+
+SRC_TEMPLATE_DIR = src_template
+
+build_dir = build
+BUILD_DIR = $(build_dir)
+
+docs_dir = docs
+DOCS_DIR = $(docs_dir)
+
+VERSION_M4 = $(M4DIR)/version.m4
+
+SRC_TARGET_PYTHON_SCRIPT = $(SRC_TEMPLATE_DIR)/$(TARGET_PYTHON_SCRIPT)
+
+
+# Install section
+
+python_script_dir = /usr/local/bin
+system_docs_dir = /usr/share/doc
+
+PYTHON_SCRIPT_INSTALL_DIR = $(python_script_dir)
+DOCS_INSTALL_DIR = $(system_docs_dir)/$(PROG)
+
+
+# Commands
+
+all: build
+
+help:
+	@echo "usage: make [ clean | install | uninstall ]"
+
+build:
+	@[ -d $(BUILD_DIR) ] $&& rm -rf $(BUILD_DIR)
+	@mkdir $(BUILD_DIR)
+
+	@$(M4) $(VERSION_M4) $(SRC_TARGET_PYTHON_SCRIPT) > $(BUILD_DIR)/$(TARGET_PYTHON_SCRIPT)
+	@chmod u+x $(BUILD_DIR)/$(TARGET_PYTHON_SCRIPT)
+
+	@mkdir $(BUILD_DIR)/$(DOCS_DIR)
+	@$(M4) $(VERSION_M4) $(TARGET_README) > $(BUILD_DIR)/$(DOCS_DIR)/$(TARGET_README)
+	@$(M4) $(VERSION_M4) $(TARGET_NEWS) > $(BUILD_DIR)/$(DOCS_DIR)/$(TARGET_NEWS)
+	@cp $(TARGET_LICENSE) $(BUILD_DIR)/$(DOCS_DIR)/$(TARGET_LICENSE)
+
+	@echo "$(PROG) has built in the \`$(BUILD_DIR)' directory."
+
+clean:
+	@rm -rf $(BUILD_DIR)
+	@rm -f $(SELF)
+	@echo "$(PROG) has cleaned."
+
+install:
+	@[ -d $(BUILD_DIR) ] || { \
+            echo "error: Build directory not found." 1>&2;\
+            echo "error: Should to run \`make' first." 1>&2;\
+            exit 1;\
+        }
+	install -d $(PYTHON_SCRIPT_INSTALL_DIR)
+	install $(BUILD_DIR)/$(TARGET_PYTHON_SCRIPT) $(PYTHON_SCRIPT_INSTALL_DIR)/$(TARGET_PYTHON_SCRIPT)
+
+	install -d $(DOCS_INSTALL_DIR)
+	install -m 644 $(BUILD_DIR)/$(DOCS_DIR)/$(TARGET_README) $(DOCS_INSTALL_DIR)/$(TARGET_README)
+	install -m 644 $(BUILD_DIR)/$(DOCS_DIR)/$(TARGET_NEWS) $(DOCS_INSTALL_DIR)/$(TARGET_NEWS)
+	install -m 644 $(BUILD_DIR)/$(DOCS_DIR)/$(TARGET_LICENSE) $(DOCS_INSTALL_DIR)/$(TARGET_LICENSE)
+
+uninstall:
+	rm -f $(PYTHON_SCRIPT_INSTALL_DIR)/$(TARGET_PYTHON_SCRIPT)
+	rm -rf $(DOCS_INSTALL_DIR)
+	@echo "$(PROG) has uninstalled."
+
+.PHONY: all help build clean install uninstall
