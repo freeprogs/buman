@@ -3,13 +3,44 @@
 #+TODO: BUG(b!) | FIXED(f) REJECT(r)
 #+PRIORITIES: A F C
 #+TAGS: current(c) testing(t)
-#+CONSTANTS: last_issue_id=0
+#+CONSTANTS: last_issue_id=1
 
 * Задачи
   :PROPERTIES:
   :COLUMNS:  %3issue_id(ID) %4issue_type(TYPE) %TODO %40ITEM %SCHEDULED %DEADLINE %1PRIORITY
   :ARCHIVE:  tasks_archive.org::* Архив задач
   :END:
+
+** TASK Придумать формат файла настроек
+   :PROPERTIES:
+   :issue_id: 1
+   :issue_type: task
+   :END:
+   [2018-07-06 Пт]
+
+   Файл состоит из записей. Запись определяется фигурными
+   скобками. Внутри записи (внутри фигурных скобок) на разных строках
+   стоят (источник, приёмник, опции). Источник - директория или файл;
+   приёмник - директория или файл; опции - список опций через
+   двоеточие. Опции могут параметризоваться через равно.
+
+   Пример бэкапа одного файла и одной директории:
+   Файл сжимается и шифруется, для результата создаётся хеш и кладётся
+   рядом в текстовом файле.
+   Директория просто копируется, создаются хеши всех файлов в ней и их
+   список кладётся рядом в текстовом файле.
+   #+BEGIN_EXAMPLE
+     {
+         /path/to/source/file
+         /path/to/destination/directory
+         arch=bzip2:hash=md5:cypher=aes
+     }
+     {
+         /path/to/source/directory
+         /path/to/destination/directory
+         hash=md5
+     }
+   #+END_EXAMPLE
 
 
 * Баги
