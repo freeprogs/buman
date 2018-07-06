@@ -42,6 +42,37 @@
      }
    #+END_EXAMPLE
 
+   [2018-07-07 Сб]
+
+   Нужно рассмотреть противоречия в конфигурации, когда записи
+   противоречат друг другу и когда внутри записи поля противоречат
+   друг другу.
+
+   Ещё можно сделать так, чтобы источников и приёмников было несколько
+   в одной записи:
+   Два разных файла кладутся в каждую из директорий.
+   #+BEGIN_EXAMPLE
+     {
+         src=/path/to/source/file1
+         src=/path/to/source/file2
+         dst=/path/to/destination/directory1
+         dst=/path/to/destination/directory2
+         opt=arch:hash
+     }
+   #+END_EXAMPLE
+
+   Ещё можно ввести синтаксис для раздельной записи опций:
+   Параметры одной опции можно последовательно аккумулировать.
+   #+BEGIN_EXAMPLE
+     {
+         src=/path/to/source/file
+         dst=/path/to/destination/directory
+         opt=arch=bzip2:hash=md5
+         opt=cypher=aes
+         opt=cypher=256bits
+     }
+   #+END_EXAMPLE
+
 
 * Баги
   :PROPERTIES:
