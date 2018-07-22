@@ -128,6 +128,8 @@ class Configuration:
 
     def load_from_file(self, filename):
         """."""
+        config_file = ConfigFile(filename, FileReader(), RecordParser())
+        self.records = config_file.load_records()
 
     def get_records(self):
         """."""
