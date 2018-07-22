@@ -36,6 +36,12 @@ class Application:
 
     def run(self):
         """."""
+        controller = Controller()
+        controller.get_arguments()
+        controller.get_configuration()
+        controller.make_tasks()
+        controller.process_tasks()
+        controller.finalize()
 
 
 class Controller:
