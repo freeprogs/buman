@@ -56,6 +56,7 @@ class Controller:
 
     def get_arguments(self):
         """."""
+        self.args.load_from_cmdline()
 
     def get_configuration(self):
         """."""
