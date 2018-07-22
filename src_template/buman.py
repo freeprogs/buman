@@ -228,7 +228,7 @@ class TasksQueue:
 
     def iterate(self):
         """."""
-        return iter([])
+        return iter(self.tasks)
 
 
 class LogConfigurator:
