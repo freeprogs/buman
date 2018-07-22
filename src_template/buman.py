@@ -16,3 +16,260 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+"""Backup manager for backup files and directories with given options.
+
+"""
+
+__version__ = '__PROGRAM_VERSION_NO_V__'
+__date__ = '__PROGRAM_DATE__'
+__author__ = '__PROGRAM_AUTHOR__ __PROGRAM_AUTHOR_EMAIL__'
+__license__ = 'GNU GPLv3'
+
+
+import sys
+import argparse
+
+
+class Application:
+    """."""
+
+    def run(self):
+        """."""
+
+
+class Controller:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def get_arguments(self):
+        """."""
+
+    def get_configuration(self):
+        """."""
+
+    def make_tasks(self):
+        """."""
+
+    def process_tasks(self):
+        """."""
+
+    def finalize(self):
+        """."""
+
+
+class Arguments:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def load_from_cmdline(self):
+        """."""
+
+    def get_argument(self, argname):
+        """."""
+        return ''
+
+
+class CommandLineArguments:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def parse_arguments(self):
+        """."""
+        return {}
+
+
+class Configuration:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def load_from_file(self, filename):
+        """."""
+
+    def get_records(self):
+        """."""
+        return []
+
+
+class ConfigFile:
+    """."""
+
+    def __init__(self, reader, parser):
+        pass
+
+    def load_records(self):
+        """."""
+        return []
+
+
+class FileReader:
+    """."""
+
+    def read_block(self):
+        """."""
+        return ''
+
+
+class RecordParser:
+    """."""
+
+    def from_string(self, s):
+        """."""
+        return Record()
+
+
+class RecordConverter:
+    """."""
+
+    def record_to_tasks(self, record):
+        """."""
+        return []
+
+
+class RecordOptionConverter:
+    """."""
+
+    def record_to_task(self, option):
+        """."""
+        return TaskOption()
+
+
+class Record:
+    """."""
+
+    def __init__(self):
+        pass
+
+
+class RecordOption:
+    """."""
+
+    def __init__(self):
+        pass
+
+
+class Task:
+    """."""
+
+    def __init__(self):
+        pass
+
+
+class TaskOption:
+    """."""
+
+    def __init__(self):
+        pass
+
+
+class TasksQueue:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def add_task(self, task):
+        """."""
+
+    def iterate(self):
+        """."""
+        return iter([])
+
+
+class LogConfigurator:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def get_config_from_task(self, task, default):
+        return LogConifg()
+
+
+class LogConfig:
+    """."""
+
+    def __init__(self, filename):
+        pass
+
+    def open(self):
+        """."""
+
+    def close(self):
+        """."""
+
+
+class Logger:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def set_config(self, config):
+        """."""
+
+    def log_message(self, message):
+        """."""
+
+
+class SystemOperations:
+    """."""
+
+    def execute_task(self, task):
+        """."""
+        return Report()
+
+
+class TaskConverter:
+    """."""
+
+    def task_to_report(self, task):
+        """."""
+        return Report()
+
+
+class Report:
+    """."""
+
+    def __init__(self):
+        pass
+
+
+class ReportConverter:
+    """."""
+
+    def to_console_message(self, report):
+        """."""
+        return ''
+
+    def to_log_message(self, report):
+        """."""
+        return ''
+
+
+class Console:
+    """."""
+
+    def __init__(self):
+        pass
+
+    def print_message(self, message):
+        """."""
+
+
+def main():
+    """."""
+    app = Application()
+    app.run()
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())
