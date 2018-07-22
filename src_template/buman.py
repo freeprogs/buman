@@ -60,6 +60,8 @@ class Controller:
 
     def get_configuration(self):
         """."""
+        filename = self.args.get_argument('config')
+        self.config.load_from_file(filename)
 
     def make_tasks(self):
         """."""
