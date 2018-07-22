@@ -79,6 +79,7 @@ class Arguments:
 
     def load_from_cmdline(self):
         """."""
+        self.args = CommandLineArguments().parse_arguments()
 
     def get_argument(self, argname):
         """."""
