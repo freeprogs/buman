@@ -95,7 +95,27 @@ class CommandLineArguments:
 
     def parse_arguments(self):
         """."""
-        return {}
+        desc = """
+        Backup manager for backup files and directories with given options.
+        """
+        parser = argparse.ArgumentParser(description=desc)
+        parser.add_argument('--config',
+                            default=self.default_config,
+                            help='configuration file (default: %(default)s)')
+        parser.add_argument('--logfile',
+                            default=self.default_logfile,
+                            help='file for logging (default: %(default)s)')
+        parser.add_argument('--version', '-V',
+                            action='version',
+                            version='%(prog)s ' + 'v' + __version__)
+        parser.add_argument('--license',
+                            action='version',
+                            version='License: ' + __license__ +
+                            ', see more details in file LICENSE'
+                            ' or at <http://www.gnu.org/licenses/>.',
+                            help='show program\'s license and exit')
+        args = parser.parse_args()
+        return args
 
 
 class Configuration:
