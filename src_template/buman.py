@@ -83,7 +83,7 @@ class Arguments:
 
     def get_argument(self, argname):
         """."""
-        return ''
+        return getattr(self.args, argname)
 
 
 class CommandLineArguments:
