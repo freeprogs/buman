@@ -263,6 +263,7 @@ class Logger:
 
     def set_config(self, config):
         """."""
+        self.config = config
 
     def log_message(self, message):
         """."""
