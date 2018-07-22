@@ -133,7 +133,7 @@ class Configuration:
 
     def get_records(self):
         """."""
-        return []
+        return self.records
 
 
 class ConfigFile:
