@@ -42,7 +42,11 @@ class Controller:
     """."""
 
     def __init__(self):
-        pass
+        self.args = Arguments()
+        self.config = Configuration()
+        self.tasks_queue = TasksQueue()
+        self.console = Console()
+        self.logger = Logger()
 
     def get_arguments(self):
         """."""
@@ -64,7 +68,7 @@ class Arguments:
     """."""
 
     def __init__(self):
-        pass
+        self.args = None
 
     def load_from_cmdline(self):
         """."""
@@ -78,7 +82,8 @@ class CommandLineArguments:
     """."""
 
     def __init__(self):
-        pass
+        self.default_config = '__PROGRAM_NAME__.conf'
+        self.default_logfile = '__PROGRAM_NAME__.log'
 
     def parse_arguments(self):
         """."""
@@ -89,7 +94,7 @@ class Configuration:
     """."""
 
     def __init__(self):
-        pass
+        self.records = None
 
     def load_from_file(self, filename):
         """."""
@@ -102,8 +107,10 @@ class Configuration:
 class ConfigFile:
     """."""
 
-    def __init__(self, reader, parser):
-        pass
+    def __init__(self, filename, reader, parser):
+        self.filename = filename
+        self.reader = reader
+        self.parser = parser
 
     def load_records(self):
         """."""
@@ -146,35 +153,43 @@ class Record:
     """."""
 
     def __init__(self):
-        pass
+        self.name = None
+        self.sources = []
+        self.destinations = []
+        self.options = []
 
 
 class RecordOption:
     """."""
 
     def __init__(self):
-        pass
+        self.name = None
+        self.params = {}
 
 
 class Task:
     """."""
 
     def __init__(self):
-        pass
+        self.name = None
+        self.source = None
+        self.destination = None
+        self.options = []
 
 
 class TaskOption:
     """."""
 
     def __init__(self):
-        pass
+        self.name = None
+        self.params = {}
 
 
 class TasksQueue:
     """."""
 
     def __init__(self):
-        pass
+        self.tasks = []
 
     def add_task(self, task):
         """."""
@@ -198,7 +213,8 @@ class LogConfig:
     """."""
 
     def __init__(self, filename):
-        pass
+        self.filename = filename
+        self.ofp = None
 
     def open(self):
         """."""
@@ -211,7 +227,7 @@ class Logger:
     """."""
 
     def __init__(self):
-        pass
+        self.config = None
 
     def set_config(self, config):
         """."""
@@ -240,7 +256,13 @@ class Report:
     """."""
 
     def __init__(self):
-        pass
+        self.name = None
+        self.status = ()
+        self.begin = None
+        self.end = None
+        self.source = None
+        self.destination = None
+        self.options = None
 
 
 class ReportConverter:
@@ -259,7 +281,7 @@ class Console:
     """."""
 
     def __init__(self):
-        pass
+        self.ofp = sys.stdout
 
     def print_message(self, message):
         """."""
