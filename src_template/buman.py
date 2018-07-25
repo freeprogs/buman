@@ -334,6 +334,7 @@ class Console:
 
     def print_message(self, message):
         """."""
+        print(message, file=self.ofp)
 
 
 def main():
