@@ -267,6 +267,7 @@ class LogConfig:
 
     def open(self):
         """."""
+        self.ofp = open(self.filename, 'a')
 
     def close(self):
         """."""
