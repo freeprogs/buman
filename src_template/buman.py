@@ -271,6 +271,7 @@ class LogConfig:
 
     def close(self):
         """."""
+        self.ofp.close()
 
 
 class Logger:
