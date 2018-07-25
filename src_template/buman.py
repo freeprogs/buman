@@ -65,6 +65,10 @@ class Controller:
 
     def make_tasks(self):
         """."""
+        converter = RecordConverter()
+        for record in self.config.get_records():
+            for task in converter.record_to_tasks(record):
+                self.tasks_queue.add_task(task)
 
     def process_tasks(self):
         """."""
