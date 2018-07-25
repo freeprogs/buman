@@ -284,6 +284,7 @@ class Logger:
 
     def log_message(self, message):
         """."""
+        print(message, file=self.config.ofp)
 
 
 class SystemOperations:
