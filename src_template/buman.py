@@ -72,6 +72,18 @@ class Controller:
 
     def process_tasks(self):
         """."""
+        logconfigurator = LogConfigurator()
+        sysoperations = SystemOperations()
+        repconverter = ReportConverter()
+        logconf_default = LogConfig(self.args.get_argument('logfile'))
+        self.console.print_message('Start processing...')
+        for task in self.tasks_queue.iterate():
+            self.logger.set_config(
+                logconfigurator.get_config_from_task(task, logconf_default))
+            report = sysoperations.execute_task(task)
+            self.console.print_message(repconverter.to_console_message(report))
+            self.logger.log_message(repconverter.to_log_message(report))
+        self.console.print_message('End processing.')
 
     def finalize(self):
         """."""
