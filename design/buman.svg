@@ -3578,21 +3578,21 @@ font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="norma
 font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
 >
 <text fill="#000000" fill-opacity="1" stroke="none" xml:space="preserve" x="5" y="42" font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
- >+ LEVEL_INFO : int</text>
+ >+ LEVEL_INFO : int = 1</text>
 </g>
 
 <g fill="#dcdcdc" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998722,0,0,0.998722,1557.2,518.294)"
 font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
 >
 <text fill="#000000" fill-opacity="1" stroke="none" xml:space="preserve" x="5" y="57" font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
- >+ LEVEL_WARNING : int</text>
+ >+ LEVEL_WARNING : int = 2</text>
 </g>
 
 <g fill="#dcdcdc" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998722,0,0,0.998722,1557.2,518.294)"
 font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
 >
 <text fill="#000000" fill-opacity="1" stroke="none" xml:space="preserve" x="5" y="72" font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
- >+ LEVEL_ERROR : int</text>
+ >+ LEVEL_ERROR : int = 3</text>
 </g>
 
 <g fill="#dcdcdc" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998722,0,0,0.998722,1557.2,518.294)"
