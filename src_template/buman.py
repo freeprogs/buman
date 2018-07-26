@@ -75,7 +75,7 @@ class Controller:
         logconfigurator = LogConfigurator()
         sysoperations = SystemOperations()
         repconverter = ReportConverter()
-        logconf_default = LogConfig(self.args.get_argument('logfile'))
+        logconf_default = LogConfig(self.args.get_argument('logfile'), 0)
         self.console.print_message('Start processing...')
         for task in self.tasks_queue.iterate():
             self.logger.set_config(
@@ -261,17 +261,9 @@ class LogConfigurator:
 class LogConfig:
     """."""
 
-    def __init__(self, filename):
+    def __init__(self, filename, level):
         self.filename = filename
-        self.ofp = None
-
-    def open(self):
-        """."""
-        self.ofp = open(self.filename, 'a')
-
-    def close(self):
-        """."""
-        self.ofp.close()
+        self.level = level
 
 
 class Logger:
@@ -286,7 +278,29 @@ class Logger:
 
     def log_message(self, message):
         """."""
-        print(message, file=self.config.ofp)
+        logfile = LogFile()
+        logfile.open(self.config.filename)
+        logfile.write(message)
+        logfile.close()
+
+
+class LogFile:
+    """."""
+
+    def __init__(self):
+        self.ofp = None
+
+    def open(self, filename):
+        """."""
+        self.ofp = open(filename, 'a')
+
+    def write(self, text):
+        """."""
+        print(text, file=self.ofp)
+
+    def close(self):
+        """."""
+        self.ofp.close()
 
 
 class SystemOperations:
