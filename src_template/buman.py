@@ -75,7 +75,8 @@ class Controller:
         logconfigurator = LogConfigurator()
         sysoperations = SystemOperations()
         repconverter = ReportConverter()
-        logconf_default = LogConfig(self.args.get_argument('logfile'), 0)
+        logconf_default = LogConfig(
+            self.args.get_argument('logfile'), Logger.LEVEL_ERROR)
         self.console.print_message('Start processing...')
         for task in self.tasks_queue.iterate():
             self.logger.set_config(
@@ -269,6 +270,10 @@ class LogConfig:
 class Logger:
     """."""
 
+    LEVEL_INFO = 1
+    LEVEL_WARNING = 2
+    LEVEL_ERROR = 3
+
     def __init__(self):
         self.config = None
 
@@ -276,12 +281,13 @@ class Logger:
         """."""
         self.config = config
 
-    def log_message(self, message):
+    def log_message(self, message, level):
         """."""
-        logfile = LogFile()
-        logfile.open(self.config.filename)
-        logfile.write(message)
-        logfile.close()
+        if level >= self.config.level:
+            logfile = LogFile()
+            logfile.open(self.config.filename)
+            logfile.write(message)
+            logfile.close()
 
 
 class LogFile:
