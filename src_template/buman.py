@@ -83,6 +83,9 @@ class Controller:
                 logconfigurator.get_config_from_task(task, logconf_default))
             report = sysoperations.execute_task(task)
             self.console.print_message(repconverter.to_console_message(report))
+            if report.status[0] == 0:
+                self.logger.log_message(
+                    repconverter.to_log_message(report), Logger.LEVEL_INFO)
             if report.status[0] != 0:
                 self.logger.log_message(
                     repconverter.to_log_message(report), Logger.LEVEL_ERROR)
