@@ -295,6 +295,14 @@ class Logger:
             logfile.close()
 
 
+class LogMessages:
+    """."""
+
+    def get_file_header(self, datetime):
+        """."""
+        return ''
+
+
 class LogFile:
     """."""
 
