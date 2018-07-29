@@ -322,6 +322,26 @@ class LogFile:
         self.ofp.close()
 
 
+class ConsoleMessages:
+    """."""
+
+    def get_header(self, configfile, logfile):
+        """."""
+        return ''
+
+    def get_task_left(self, name, number, total, starttime):
+        """."""
+        return ''
+
+    def get_task_right(self, status):
+        """."""
+        return ''
+
+    def get_footer(self, total, success, skipped, failed):
+        """."""
+        return ''
+
+
 class SystemOperations:
     """."""
 
