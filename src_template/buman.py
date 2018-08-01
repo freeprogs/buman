@@ -29,6 +29,8 @@ __license__ = 'GNU GPLv3'
 
 import sys
 import argparse
+import time
+import os
 
 
 class Application:
@@ -289,8 +291,15 @@ class Logger:
     def log_message(self, message, level):
         """."""
         if level >= self.config.level:
+            logfilename = self.config.filename
             logfile = LogFile()
-            logfile.open(self.config.filename)
+            if not os.path.exists(logfilename):
+                datetime = time.strftime(
+                    '%Y-%m-%d %H:%M:%S', time.localtime())
+                logfile.open(logfilename)
+                logfile.write(LogMessages().get_file_header(datetime))
+            else:
+                logfile.open(logfilename)
             logfile.write(message)
             logfile.close()
 
