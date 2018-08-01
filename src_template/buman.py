@@ -338,7 +338,11 @@ class ConsoleMessages:
 
     def get_header(self, configfile, logfile):
         """."""
-        return ''
+        datetime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+        fmt = ('Started processing at {}\n'
+               'Configurated by {} with default log in {}')
+        out = fmt.format(datetime, configfile, logfile)
+        return out
 
     def get_task_left(self, name, number, total, starttime):
         """."""
