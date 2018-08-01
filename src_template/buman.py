@@ -255,6 +255,10 @@ class TasksQueue:
         """."""
         return iter(self.tasks)
 
+    def length(self):
+        """."""
+        return len(self.tasks)
+
 
 class LogConfigurator:
     """."""
