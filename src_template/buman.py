@@ -418,9 +418,12 @@ class Console:
     def __init__(self):
         self.ofp = sys.stdout
 
-    def print_message(self, message):
+    def print_message(self, message, with_newline=True):
         """."""
-        print(message, file=self.ofp)
+        if with_newline:
+            print(message, file=self.ofp)
+        else:
+            print(message, file=self.ofp, flush=True, end='')
 
 
 def main():
