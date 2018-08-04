@@ -358,7 +358,8 @@ class ConsoleMessages:
 
     def get_task_right(self, status):
         """."""
-        return ''
+        out = ('ok', 'failed', 'skipped')[status]
+        return out
 
     def get_footer(self, total, success, skipped, failed):
         """."""
