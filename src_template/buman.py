@@ -351,7 +351,10 @@ class ConsoleMessages:
 
     def get_task_left(self, name, number, total):
         """."""
-        return ''
+        timehms = time.strftime('%H:%M:%S', time.localtime())
+        fmt = '{}/{} started at {} {} ... '
+        out = fmt.format(number, total, timehms, name)
+        return out
 
     def get_task_right(self, status):
         """."""
