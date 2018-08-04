@@ -337,7 +337,7 @@ class LogMessages:
     def get_file_header(self, datetime):
         """."""
         out = ('# Log of __PROGRAM_NAME__ __PROGRAM_VERSION__\n'
-               '# Started ' + datetime + '\n')
+               '# Created ' + datetime + '\n')
         return out
 
 
