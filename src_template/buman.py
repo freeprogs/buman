@@ -76,22 +76,45 @@ class Controller:
         """."""
         logconfigurator = LogConfigurator()
         sysoperations = SystemOperations()
+        consolemessages = ConsoleMessages()
         repconverter = ReportConverter()
         logconf_default = LogConfig(
             self.args.get_argument('logfile'), Logger.LEVEL_ERROR)
-        self.console.print_message('Start processing...')
+        taskn_total = self.tasks_queue.length()
+        taskn_success = taskn_skipped = taskn_failed = 0
+        taskn_cur = 0
+
+        self.console.print_message(
+            consolemessages.get_header(
+                self.args.get_argument('config'),
+                self.args.get_argument('logfile')))
         for task in self.tasks_queue.iterate():
+            taskn_cur += 1
             self.logger.set_config(
                 logconfigurator.get_config_from_task(task, logconf_default))
+            self.console.print_message(
+                consolemessages.get_task_left(
+                    task.name, taskn_cur, taskn_total),
+                with_newline=False)
             report = sysoperations.execute_task(task)
+            if report.status[0] == 0:
+                self.console.print_message(
+                    consolemessages.get_task_right(0))
+            else:
+                self.console.print_message(
+                    consolemessages.get_task_right(1))
             self.console.print_message(repconverter.to_console_message(report))
             if report.status[0] == 0:
+                taskn_success += 1
                 self.logger.log_message(
                     repconverter.to_log_message(report), Logger.LEVEL_INFO)
             if report.status[0] != 0:
+                taskn_failed += 1
                 self.logger.log_message(
                     repconverter.to_log_message(report), Logger.LEVEL_ERROR)
-        self.console.print_message('End processing.')
+        self.console.print_message(
+            consolemessages.get_footer(
+                taskn_total, taskn_success, taskn_skipped, taskn_failed))
 
     def finalize(self):
         """."""
