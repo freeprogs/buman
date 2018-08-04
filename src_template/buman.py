@@ -360,7 +360,8 @@ class ConsoleMessages:
     def get_footer(self, total, success, skipped, failed):
         """."""
         datetime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-        fmt = ('Completed processing at {}\n'
+        fmt = ('\n'
+               'Completed processing at {}\n'
                'Success: {}, Failed: {}, Skipped: {}, Total: {}')
         out = fmt.format(datetime, success, failed, skipped, total)
         return out
