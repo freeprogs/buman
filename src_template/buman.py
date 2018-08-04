@@ -348,7 +348,7 @@ class ConsoleMessages:
         out = fmt.format(datetime, configfile, logfile)
         return out
 
-    def get_task_left(self, name, number, total, starttime):
+    def get_task_left(self, name, number, total):
         """."""
         return ''
 
