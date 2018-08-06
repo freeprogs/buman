@@ -96,22 +96,21 @@ class Controller:
                 consolemessages.get_task_left(
                     task.name, taskn_cur, taskn_total),
                 with_newline=False)
-            report = sysoperations.execute_task(task)
-            if report.status[0] == 0:
-                self.console.print_message(
-                    consolemessages.get_task_right(0))
-            else:
-                self.console.print_message(
-                    consolemessages.get_task_right(1))
-            self.console.print_message(repconverter.to_console_message(report))
-            if report.status[0] == 0:
+            status, report = sysoperations.execute_task(task)
+            self.console.print_message(consolemessages.get_task_right(status))
+            if status == SystemOperations.STATUS_OK:
                 taskn_success += 1
                 self.logger.log_message(
                     repconverter.to_log_message(report), Logger.LEVEL_INFO)
-            if report.status[0] != 0:
+            elif status == SystemOperations.STATUS_SKIPPED:
+                taskn_skipped += 1
+            elif status == SystemOperations.STATUS_FAILED:
                 taskn_failed += 1
                 self.logger.log_message(
                     repconverter.to_log_message(report), Logger.LEVEL_ERROR)
+            elif status == SystemOperations.STATUS_CTRLC:
+                raise KeyboardInterrupt
+            self.console.print_message(repconverter.to_console_message(report))
         self.console.print_message(
             consolemessages.get_footer(
                 taskn_total, taskn_success, taskn_skipped, taskn_failed))
@@ -381,7 +380,7 @@ class ConsoleMessages:
 
     def get_task_right(self, status):
         """."""
-        out = ('ok', 'failed', 'skipped')[status]
+        out = ('OK', 'SKIPPED', 'FAILED', 'INTERRUPT')[status]
         return out
 
     def get_footer(self, total, success, skipped, failed):
@@ -396,6 +395,11 @@ class ConsoleMessages:
 
 class SystemOperations:
     """."""
+
+    STATUS_OK = 0
+    STATUS_SKIPPED = 1
+    STATUS_FAILED = 2
+    STATUS_CTRLC = 3
 
     def execute_task(self, task):
         """."""
