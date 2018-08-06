@@ -431,7 +431,23 @@ class SystemOperations:
 
     def execute_task(self, task):
         """."""
-        return Report()
+        converter = TaskConverter()
+        task.begin = time.time()
+        try:
+            for i in 1, 2, 3:
+                print('cmd', i, end=' ', flush=True)
+                time.sleep(1)
+            task.status = (0, 'Success')
+            #task.status = (1, 'File is not found')
+            task.end = time.time()
+            report = converter.task_to_report(task)
+            if task.status[0] == 0:
+                out = (self.STATUS_OK, report)
+            else:
+                out = (self.STATUS_FAILED, report)
+        except KeyboardInterrupt:
+            out = (self.STATUS_CTRLC, None)
+        return out
 
 
 class TaskConverter:
