@@ -431,7 +431,19 @@ class TaskConverter:
 
     def task_to_report(self, task):
         """."""
-        return Report()
+        report = Report()
+        report.name = task.name
+        report.status = task.status
+        report.begin = task.begin
+        report.end = task.end
+        report.source = task.source
+        report.destination = task.destination
+        report.options = ', '.join(
+            '{}=({})'.format(
+                i.name, ','.join(
+                    '{}:{}'.format(k, v) for k, v in i.params.items()))
+            for i in task.options)
+        return report
 
 
 class Report:
