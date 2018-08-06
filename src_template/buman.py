@@ -477,7 +477,15 @@ class ReportConverter:
 
     def to_log_message(self, report):
         """."""
-        return ''
+        out = '{} {} {} {} {} {} {}'.format(
+            time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(report.end)),
+            report.name,
+            report.source,
+            report.destination,
+            report.options,
+            report.status[0],
+            report.status[1])
+        return out
 
 
 class Console:
