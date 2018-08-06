@@ -192,7 +192,15 @@ class ConfigFile:
 
     def load_records(self):
         """."""
-        return []
+        record = Record()
+        record.name = 'Rule1'
+        record.sources = ['src1/file1.txt', 'src2/file2.txt']
+        record.destinations = ['dst1/file1.txt']
+        option = RecordOption()
+        option.name = 'hash'
+        option.params = {'algo': 'md5'}
+        record.options = [option]
+        return [record]
 
 
 class FileReader:
