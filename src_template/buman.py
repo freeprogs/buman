@@ -216,7 +216,20 @@ class RecordConverter:
 
     def record_to_tasks(self, record):
         """."""
-        return []
+        out = []
+        for src in record.sources:
+            for dst in record.destinations:
+                task = Task()
+                task.name = record.name
+                task.source = src
+                task.destination = dst
+                for opt in record.options:
+                    option = TaskOption()
+                    option.name = opt.name
+                    option.params = opt.params
+                    task.options.append(option)
+                out.append(task)
+        return out
 
 
 class RecordOptionConverter:
