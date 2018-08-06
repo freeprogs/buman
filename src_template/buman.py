@@ -302,7 +302,14 @@ class LogConfigurator:
         pass
 
     def get_config_from_task(self, task, default):
-        return LogConifg()
+        logopt = [i for i in task.options if i.name == 'log']
+        if logopt:
+            opt = logopt[0]
+            filename = opt.params.get('filename', default.filename)
+            level = opt.params.get('level', default.level)
+            return LogConfig(filename, level)
+        else:
+            return default
 
 
 class LogConfig:
