@@ -31,6 +31,19 @@ import sys
 import argparse
 import time
 import os
+import re
+
+
+class ConfigFileNotFound(Exception):
+    pass
+
+
+class ConfigFileEmpty(Exception):
+    pass
+
+
+class ConfigFileSyntax(Exception):
+    pass
 
 
 class Application:
@@ -59,10 +72,31 @@ class Controller:
     def get_arguments(self):
         """."""
         self.args.load_from_cmdline()
+        consolemessages = ConsoleMessages()
+        self.console.print_message(consolemessages.get_progname())
 
     def get_configuration(self):
         """."""
+        consolemessages = ConsoleMessages()
+        configchecker = ConfigFileChecker()
         filename = self.args.get_argument('config')
+        logfile = self.args.get_argument('logfile')
+        self.console.print_message(
+            consolemessages.get_logfile(logfile))
+        self.console.print_message(
+            consolemessages.get_configuration(filename))
+        if not configchecker.exists(filename):
+            self.console.print_message(
+                consolemessages.get_config_nofile())
+            raise ConfigFileNotFound
+        if configchecker.is_empty(filename):
+            self.console.print_message(
+                consolemessages.get_config_empty())
+            raise ConfigFileEmpty
+        if not configchecker.is_correct(filename):
+            self.console.print_message(
+                consolemessages.get_config_syntax())
+            raise ConfigFileSyntax
         self.config.load_from_file(filename)
 
     def make_tasks(self):
@@ -180,6 +214,29 @@ class Configuration:
     def get_records(self):
         """."""
         return self.records
+
+
+class ConfigFileChecker:
+    """."""
+
+    def exists(self, filename):
+        """."""
+        out = os.path.exists(filename)
+        return out
+
+    def is_empty(self, filename):
+        """."""
+        with open(filename, encoding='utf-8') as fin:
+            result = fin.read().strip()
+        return result == ''
+
+    def is_correct(self, filename):
+        """."""
+        with open(filename, encoding='utf-8') as fin:
+            text = fin.read()
+        cleared = text.strip()
+        out = re.search(r'^\{.*\}$', cleared) is not None
+        return out
 
 
 class ConfigFile:
@@ -390,13 +447,43 @@ class LogFile:
 class ConsoleMessages:
     """."""
 
+    def get_progname(self):
+        """."""
+        out = '__PROGRAM_NAME__ __PROGRAM_VERSION__'
+        return out
+
+    def get_configuration(self, filename):
+        """."""
+        fmt = 'Loading configuration from {}'
+        out = fmt.format(filename)
+        return out
+
+    def get_logfile(self, filename):
+        """."""
+        fmt = 'Set default logging to {}'
+        out = fmt.format(filename)
+        return out
+
+    def get_config_nofile(self):
+        """."""
+        out = 'no config file found'
+        return out
+
+    def get_config_empty(self):
+        """."""
+        out = 'config file is empty'
+        return out
+
+    def get_config_syntax(self):
+        """."""
+        out = 'config file has incorrect syntax'
+        return out
+
     def get_header(self, configfile, logfile):
         """."""
         datetime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-        fmt = ('__PROGRAM_NAME__ __PROGRAM_VERSION__\n'
-               'Configurated by {} with default log in {}\n'
-               'Started processing at {}\n')
-        out = fmt.format(configfile, logfile, datetime)
+        fmt = 'Started processing at {}\n'
+        out = fmt.format(datetime)
         return out
 
     def get_task_left(self, name, number, total):
@@ -529,7 +616,14 @@ class Console:
 def main():
     """."""
     app = Application()
-    app.run()
+    try:
+        app.run()
+    except (ConfigFileNotFound,
+            ConfigFileEmpty,
+            ConfigFileSyntax):
+        return 1
+    except KeyboardInterrupt:
+        print('Bye')
     return 0
 
 if __name__ == '__main__':
