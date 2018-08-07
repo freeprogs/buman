@@ -263,9 +263,13 @@ class ConfigFile:
 class FileReader:
     """."""
 
-    def read_block(self):
+    def read_block(self, ifp):
         """."""
-        return ''
+        if hasattr(self, 'x'):
+            return ''
+        else:
+            self.x = 1
+            return '{x}'
 
 
 class RecordParser:
