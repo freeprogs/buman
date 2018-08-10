@@ -1,0 +1,79 @@
+; This grammar defines the configuration file language
+
+record-list = 1*(*WSP 1*record *WSP)
+
+record = "{" record-body "}"
+
+record-body = 1*(1*WSP (name-line / source-line / destination-line / option-line))
+
+name-line = %s"name=" (ALNUM / PUNCT) *(ALNUM / PUNCT / SP) LF
+
+source-line = %s"src=" path LF
+
+destination-line = %s"dst=" path LF
+
+option-line = %s"opt=" options-list LF
+
+path = 1*PATHCHAR
+
+options-list = inline-option *(":" inline-option)
+
+inline-option = hash-option / arch-option / log-option
+
+hash-option = %s"hash" ["=" hash-value]
+
+arch-option = %s"arch" ["=" arch-value]
+
+log-option = %s"log" ["=" log-values-list]
+
+cipher-option = %s"cipher" ["=" cipher-values-list]
+
+hash-value = %s"md5"
+
+arch-value = %s"tar" / %s"bz2"
+
+log-values-list = log-value *("," log-value)
+
+log-value = log-value-file / log-value-level
+
+log-value-file = %s"file=" filename
+
+log-value-level = %s"level=" log-value-level-value
+
+filename = 1*PATHCHAR
+
+log-value-level-value = %s"info" / %s"warning" / %s"error"
+
+cipher-values-list = cipher-value *("," cipher-value)
+
+cipher-value = cipher-algo / cipher-password
+
+cipher-algo = %s"algo=" cipher-algotype
+
+cipher-algotype = %s"xor" / %s"aes"
+
+cipher-password = %s"password=" 1*PSWDCHAR
+
+PSWDCHAR = ALNUM / PUNCT
+
+PATHCHAR = ALNUM / PUNCT
+
+ALNUM = ALPHA / DIGIT
+
+ALPHA = %x41-5A / %x61-7A
+
+DIGIT = %x30-39
+
+PUNCT = %x21-2F / %x3A-40 / %x5B-60 / %x7B-7E
+      ; !"#$%&'()*+,-./
+      ; :;<=>?@
+      ; [\]^_`
+      ; {|}~
+
+WSP = SP / TAB / LF
+
+SP = %x20
+
+TAB = %x09
+
+LF = %x0A
