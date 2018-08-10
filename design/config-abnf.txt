@@ -4,15 +4,17 @@ record-list = 1*(*WSP 1*record *WSP)
 
 record = "{" record-body "}"
 
-record-body = 1*(1*WSP (name-line / source-line / destination-line / option-line))
+record-body = 1*(1*WSP (recname-line / source-line / destination-line / option-line))
 
-name-line = %s"name=" (ALNUM / PUNCT) *(ALNUM / PUNCT / SP) LF
+recname-line = %s"name=" recname LF
 
 source-line = %s"src=" path LF
 
 destination-line = %s"dst=" path LF
 
 option-line = %s"opt=" options-list LF
+
+recname = ALNUMPUNCT / (ALNUMPUNCT *(ALNUMPUNCT / SP) ALNUMPUNCT)
 
 path = 1*PATHCHAR
 
@@ -54,9 +56,13 @@ cipher-algotype = %s"xor" / %s"aes"
 
 cipher-password = %s"password=" 1*PSWDCHAR
 
-PSWDCHAR = ALNUM / PUNCT
+WSP = SP / TAB / LF
 
-PATHCHAR = ALNUM / PUNCT
+PSWDCHAR = ALNUMPUNCT
+
+PATHCHAR = ALNUMPUNCT
+
+ALNUMPUNCT = ALNUM / PUNCT
 
 ALNUM = ALPHA / DIGIT
 
@@ -69,8 +75,6 @@ PUNCT = %x21-2F / %x3A-40 / %x5B-60 / %x7B-7E
       ; :;<=>?@
       ; [\]^_`
       ; {|}~
-
-WSP = SP / TAB / LF
 
 SP = %x20
 
