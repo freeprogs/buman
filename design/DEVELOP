@@ -9,3 +9,9 @@ To make buman.xmi the program Umbrello 2.21.3 was used. Since
 buman.xmi is just an XML-file the graphic file buman.svg created from
 the buman.xmi, using internal export feature in Umbrello 2.21.3. The
 buman.svg may be viewed in any SVG-viewer.
+
+
+The file uses ABNF with extension
+  config-abnf.txt
+
+You can find the language for grammars at rfc5234 and rfc7405.
