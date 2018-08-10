@@ -1823,6 +1823,22 @@ font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="norma
 >
 </g>
 
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998823,0,0,0.998823,1228.61,773.364)"
+font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="none" stroke="#ff0000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" transform="matrix(0.998823,0,0,0.998823,1228.61,773.364)"
+font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
+>
+<path vector-effect="non-scaling-stroke" fill-rule="evenodd" d="M-84.2249,-459.536 L-442.359,-107.41 L-873.41,20.1246"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998823,0,0,0.998823,1228.61,773.364)"
+font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
+>
+</g>
+
 <g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998823,0,0,0.998823,537.61,699.403)"
 font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
 >
@@ -1836,22 +1852,6 @@ font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="norma
 </g>
 
 <g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998823,0,0,0.998823,537.61,699.403)"
-font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
->
-</g>
-
-<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998823,0,0,0.998823,1228.61,773.364)"
-font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
->
-</g>
-
-<g fill="none" stroke="#ff0000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" transform="matrix(0.998823,0,0,0.998823,1228.61,773.364)"
-font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
->
-<path vector-effect="non-scaling-stroke" fill-rule="evenodd" d="M-84.2249,-459.536 L-442.359,-107.41 L-873.41,20.1246"/>
-</g>
-
-<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998823,0,0,0.998823,1228.61,773.364)"
 font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
 >
 </g>
@@ -4653,7 +4653,7 @@ font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="norma
 font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
 >
 <text fill="#000000" fill-opacity="1" stroke="none" xml:space="preserve" x="5" y="27" font-family="Sans Serif" font-size="13.3333" font-weight="400" font-style="normal" 
- >+ type : str</text>
+ >+ type : int</text>
 </g>
 
 <g fill="#dcdcdc" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.998823,0,0,0.998823,182.994,1247.55)"
