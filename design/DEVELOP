@@ -1,8 +1,9 @@
 This file describes this directory.
 
+
 These files should contain equal UML diagrams:
-buman.xmi - writable UML diagram
-buman.svg - readable (by graphic viewers) UML diagram
+  buman.xmi - writable UML diagram
+  buman.svg - readable (by graphic viewers) UML diagram
 
 To make buman.xmi the program Umbrello 2.21.3 was used. Since
 buman.xmi is just an XML-file the graphic file buman.svg created from
