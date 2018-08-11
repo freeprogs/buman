@@ -46,7 +46,7 @@ log-values-list = log-value *("," log-value)
 
 log-value = log-value-file / log-value-level
 
-log-value-file = %s"file=" filename
+log-value-file = %s"file=<" filename ">"
 
 log-value-level = %s"level=" log-value-level-value
 
