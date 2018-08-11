@@ -38,7 +38,7 @@ log-option = %s"log" ["=" log-values-list]
 
 cipher-option = %s"cipher" ["=" cipher-values-list]
 
-hash-value = %s"md5"
+hash-value = %s"md5" / %s"sha256"
 
 arch-value = %s"tar" / %s"bz2"
 
