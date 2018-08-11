@@ -5,12 +5,12 @@ record-list = 1*(*WSP 1*record *WSP)
 record = "{" LF record-body "}" LF
 
 record-body = 1*(*WSP (
-    comment-line /
-    recname-line /
-    source-line /
-    destination-line /
-    option-line
-    ) *WSP)
+              comment-line /
+              recname-line /
+              source-line /
+              destination-line /
+              option-line
+              ) *WSP)
 
 comment-line = "#" *ALNUMPUNCT LF
 
