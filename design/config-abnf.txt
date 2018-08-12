@@ -62,7 +62,7 @@ cipher-algo = %s"algo=" cipher-algotype
 
 cipher-algotype = %s"xor" / %s"aes"
 
-cipher-password = %s"password=" 1*PSWDCHAR
+cipher-password = %s"password=<" 1*PSWDCHAR ">"
 
 WSP = SP / TAB / LF
 
