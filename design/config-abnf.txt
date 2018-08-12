@@ -89,3 +89,25 @@ SP = %x20
 TAB = %x09
 
 LF = %x0A
+
+
+; Example:
+;
+; {
+;     name=Name 1
+;     src=/dir1/file1.txt
+;     dst=/dir2/file2.txt
+;     opt=hash=md5:log=file=</dir/file.log>,level=info:arch=tar
+;     opt=cipher=algo=aes,password=<abcde>
+; }
+; {
+;     name=Name 2
+;     src=/dir1/file1.txt
+;     dst=/dir2/file2.txt
+;     opt=hash=md5
+;     opt=log=file=</dir/file.log>
+;     opt=log=level=info
+;     opt=arch=tar
+;     opt=cipher=algo=aes
+;     opt=cipher=password=<abcde>
+; }
