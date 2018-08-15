@@ -303,6 +303,24 @@ class RecordParser:
         return record
 
 
+class ConfigParseTokenizer:
+    """."""
+
+    def text_to_blocks(self, text):
+        """."""
+
+    def blocks_to_tokens(self, blocks):
+        """."""
+
+
+class ConfigParseToken:
+    """."""
+
+    def __init__(self):
+        self.type = None
+        self.value = None
+
+
 class RecordConverter:
     """."""
 
