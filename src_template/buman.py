@@ -319,6 +319,18 @@ class ConfigParseTokenizer:
 
     def blocks_to_tokens(self, blocks):
         """."""
+        name = ConfigParseToken()
+        name.type, name.value = ConfigParseToken.NAME, 'Rule1'
+        src1 = ConfigParseToken()
+        src1.type, src1.value = ConfigParseToken.SRC, 'src1/file1.txt'
+        src2 = ConfigParseToken()
+        src2.type, src2.value = ConfigParseToken.SRC, 'src2/file2.txt'
+        dst = ConfigParseToken()
+        dst.type, dst.value = ConfigParseToken.DST, 'dst1/file1.txt'
+        opt = ConfigParseToken()
+        opt.type, opt.value = ConfigParseToken.OPT, ('hash', {'algo': 'md5'})
+        lst = [name, src1, src2, dst, opt]
+        return iter(lst)
 
 
 class ConfigParseToken:
