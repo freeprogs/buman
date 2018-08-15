@@ -316,21 +316,42 @@ class ConfigParseTokenizer:
 
     def text_to_blocks(self, text):
         """."""
+        lst = ['name=Rule1',
+               'src=src1/file1.txt',
+               'src=src2/file2.txt',
+               'dst=dst1/file1.txt',
+               'opt=hash=md5']
+        return iter(lst)
 
     def blocks_to_tokens(self, blocks):
         """."""
-        name = ConfigParseToken()
-        name.type, name.value = ConfigParseToken.NAME, 'Rule1'
-        src1 = ConfigParseToken()
-        src1.type, src1.value = ConfigParseToken.SRC, 'src1/file1.txt'
-        src2 = ConfigParseToken()
-        src2.type, src2.value = ConfigParseToken.SRC, 'src2/file2.txt'
-        dst = ConfigParseToken()
-        dst.type, dst.value = ConfigParseToken.DST, 'dst1/file1.txt'
-        opt = ConfigParseToken()
-        opt.type, opt.value = ConfigParseToken.OPT, ('hash', {'algo': 'md5'})
-        lst = [name, src1, src2, dst, opt]
-        return iter(lst)
+        for block in blocks:
+            if block.startswith('name='):
+                token = ConfigParseToken()
+                token.type = ConfigParseToken.NAME
+                token.value = block.split('=', 1)[1]
+                yield token
+            elif block.startswith('src='):
+                token = ConfigParseToken()
+                token.type = ConfigParseToken.SRC
+                token.value = block.split('=', 1)[1]
+                yield token
+            elif block.startswith('dst='):
+                token = ConfigParseToken()
+                token.type = ConfigParseToken.DST
+                token.value = block.split('=', 1)[1]
+                yield token
+            elif block.startswith('opt='):
+                token = ConfigParseToken()
+                token.type = ConfigParseToken.OPT
+                optvalue = block.split('=', 1)[1]
+                if optvalue.startswith('hash'):
+                    if '=' in optvalue:
+                        optalgo = optvalue.split('=', 1)[1]
+                    else:
+                        optalgo = 'md5'
+                    token.value = ('hash', {'algo': optalgo})
+                yield token
 
 
 class ConfigParseToken:
