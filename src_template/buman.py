@@ -316,6 +316,11 @@ class ConfigParseTokenizer:
 class ConfigParseToken:
     """."""
 
+    NAME = 1
+    SRC = 2
+    DST = 3
+    OPT = 4
+
     def __init__(self):
         self.type = None
         self.value = None
