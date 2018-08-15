@@ -239,6 +239,21 @@ class ConfigFileChecker:
         return out
 
 
+class ConfigCheckTokenizer:
+    """."""
+
+    def tokenize(self, text):
+        """."""
+
+
+class ConfigCheckToken:
+    """."""
+
+    def __init__(self):
+        self.type = None
+        self.value = None
+
+
 class ConfigFile:
     """."""
 
