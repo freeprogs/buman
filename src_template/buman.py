@@ -320,12 +320,11 @@ class ConfigParseTokenizer:
 
     def text_to_blocks(self, text):
         """."""
-        lst = ['name=Rule1',
-               'src=src1/file1.txt',
-               'src=src2/file2.txt',
-               'dst=dst1/file1.txt',
-               'opt=hash=md5']
-        return iter(lst)
+        for line in text.splitlines():
+            cleared_line = line.lstrip()
+            if cleared_line.startswith(
+                    ('name=', 'src=', 'dst=', 'opt=')):
+                yield cleared_line
 
     def blocks_to_tokens(self, blocks):
         """."""
