@@ -235,7 +235,9 @@ class ConfigFileChecker:
         with open(filename, encoding='utf-8') as fin:
             text = fin.read()
         cleared = text.strip()
-        out = re.search(r'^\{.*\}$', cleared) is not None
+        out = re.search(r'^\{.*\}$',
+                        cleared,
+                        flags=re.DOTALL) is not None
         return out
 
 
