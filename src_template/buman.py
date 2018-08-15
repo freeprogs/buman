@@ -282,11 +282,13 @@ class FileReader:
 
     def read_block(self, ifp):
         """."""
-        if hasattr(self, 'x'):
-            return ''
-        else:
-            self.x = 1
-            return '{x}'
+        block_lines = []
+        for line in ifp:
+            block_lines.append(line)
+            if line.strip() == '}':
+                break
+        out = ''.join(block_lines).strip()
+        return out
 
 
 class RecordParser:
