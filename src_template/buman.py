@@ -293,13 +293,21 @@ class RecordParser:
     def from_string(self, s):
         """."""
         record = Record()
-        record.name = 'Rule1'
-        record.sources = ['src1/file1.txt', 'src2/file2.txt']
-        record.destinations = ['dst1/file1.txt']
-        option = RecordOption()
-        option.name = 'hash'
-        option.params = {'algo': 'md5'}
-        record.options = [option]
+        tokenizer = ConfigParseTokenizer()
+        blocks = tokenizer.text_to_blocks(s)
+        tokens = tokenizer.blocks_to_tokens(blocks)
+        for token in tokens:
+            if token.type == ConfigParseToken.NAME:
+                record.name = token.value
+            elif token.type == ConfigParseToken.SRC:
+                record.sources.append(token.value)
+            elif token.type == ConfigParseToken.DST:
+                record.destinations.append(token.value)
+            elif token.type == ConfigParseToken.OPT:
+                option = RecordOption()
+                option.name = token.value[0]
+                option.params = token.value[1]
+                record.options.append(option)
         return record
 
 
