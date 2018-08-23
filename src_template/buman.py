@@ -631,6 +631,219 @@ class SystemOperations:
         return out
 
 
+class OperationsBuilder:
+    """."""
+
+    def build_copy(self, options):
+        """."""
+        return CopyOperation(CopySetting())
+
+    def build_hash(self, options):
+        """."""
+        return HashOperation(HashSetting())
+
+    def build_archive(self, options):
+        """."""
+        return ArchiveOperation(ArchiveSetting())
+
+    def build_cipher(self, options):
+        """."""
+        return CipherOperation(CipherSetting())
+
+
+class ContextCommands:
+    """."""
+
+    def __init__(self, copy_operation, hash_operation,
+                 archive_operation, cipher_operation):
+        self.copy_operation = copy_operation
+        self.hash_operation = hash_operation
+        self.archive_operation = archive_operation
+        self.cipher_operation = cipher_operation
+
+    def file_to_file(self, src, dst):
+        """."""
+        return CommandResult()
+
+    def file_to_dir(self, src, dst):
+        """."""
+        return CommandResult()
+
+    def dir_to_dir(self, src, dst):
+        """."""
+        return CommandResult()
+
+
+class CommandResult:
+    """."""
+
+    def __init__(self):
+        self.status = None
+
+
+class CopySetting:
+    """."""
+
+    ERROR = 0
+    SKIP = 1
+    REPLACE = 2
+    ROTATE = 3
+
+    def __init__(self):
+        self.mode = None
+
+
+class CopyOperation:
+    """."""
+
+    def __init__(self, setting):
+        self.setting = setting
+
+    def copy_file(self, src, dst):
+        """."""
+        pass
+
+    def copy_dir(self, src, dst):
+        """."""
+        pass
+
+
+class HashSetting:
+    """."""
+
+    MD5 = 0
+    SHA256 = 1
+
+    def __init__(self):
+        self.algo = None
+
+
+class HashOperation:
+    """."""
+
+    def __init__(self, setting):
+        self.setting = setting
+
+    def hash_file(self, path):
+        """."""
+        pass
+
+    def hash_dir(self, path):
+        """."""
+        pass
+
+
+class ArchiveSetting:
+    """."""
+
+    TAR = 0
+    BZ2 = 1
+
+    def __init__(self):
+        self.algo = None
+
+
+class ArchiveOperation:
+    """."""
+
+    def __init__(self, setting):
+        self.setting = setting
+
+    def archive_file(self, src, dst):
+        """."""
+        pass
+
+    def archive_dir(self, src, dst):
+        """."""
+        pass
+
+
+class CipherSetting:
+    """."""
+
+    XOR = 0
+    AES = 1
+
+    def __init__(self):
+        self.algo = None
+        self.password = None
+
+
+class CipherOperation:
+    """."""
+
+    def __init__(self, setting):
+        self.setting = setting
+
+    def encrypt_file(self, src, dst):
+        """."""
+        pass
+
+    def encrypt_dir(self, src, dst):
+        """."""
+        pass
+
+
+class Copier:
+    """."""
+
+    def copy_file_error(self, src, dst):
+        """."""
+        return True
+
+    def copy_file_skip(self, src, dst):
+        """."""
+        return True
+
+    def copy_file_replace(self, src, dst):
+        """."""
+        return True
+
+    def copy_file_rotate(self, src, dst):
+        """."""
+        return True
+
+
+class Hasher:
+    """."""
+
+    def hash_md5_file(self, path):
+        """."""
+        return ''
+
+    def hash_sha256_file(self, path):
+        """."""
+        return ''
+
+
+class Archiver:
+    """."""
+
+    def archive_tar(self, src, dst):
+        """."""
+        return True
+
+    def archive_bz2(self, src, dst):
+        """."""
+        return True
+
+
+class XorCryptor:
+    """."""
+
+    def encrypt_file(self, src, dst, password):
+        """."""
+        return True
+
+
+class AESCryptor:
+    """."""
+
+    def encrypt_file(self, src, dst, password):
+        """."""
+        return True
+
+
 class TaskConverter:
     """."""
 
