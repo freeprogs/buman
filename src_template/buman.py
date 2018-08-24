@@ -677,7 +677,13 @@ class ContextCommands:
 class CommandResult:
     """."""
 
+    F_OK = 0x1
+    F_FAIL = 0x2
+    F_SKIP = 0x4
+    F_INTER = 0x8
+
     def __init__(self):
+        self.flags = 0
         self.status = None
 
 
