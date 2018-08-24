@@ -636,19 +636,27 @@ class OperationsBuilder:
 
     def build_copy(self, options):
         """."""
-        return CopyOperation(CopySetting())
+        CopyOperation(CopySetting())
+        out = None
+        return out
 
     def build_hash(self, options):
         """."""
-        return HashOperation(HashSetting())
+        HashOperation(HashSetting())
+        out = None
+        return out
 
     def build_archive(self, options):
         """."""
-        return ArchiveOperation(ArchiveSetting())
+        ArchiveOperation(ArchiveSetting())
+        out = None
+        return out
 
     def build_cipher(self, options):
         """."""
-        return CipherOperation(CipherSetting())
+        CipherOperation(CipherSetting())
+        out = None
+        return out
 
 
 class ContextCommands:
