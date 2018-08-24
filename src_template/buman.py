@@ -46,6 +46,14 @@ class ConfigFileSyntax(Exception):
     pass
 
 
+class SystemOperationsPathError(Exception):
+    pass
+
+
+class SystemOperationsContextError(Exception):
+    pass
+
+
 class Application:
     """."""
 
@@ -612,22 +620,43 @@ class SystemOperations:
 
     def execute_task(self, task):
         """."""
-        converter = TaskConverter()
+        operations_builder = OperationsBuilder()
+        copy_operation = operations_builder.build_copy(task.options)
+        hash_operation = operations_builder.build_hash(task.options)
+        archive_operation = operations_builder.build_archive(task.options)
+        cipher_operation = operations_builder.build_cipher(task.options)
+        context_commands = ContextCommands(
+            copy_operation, hash_operation,
+            archive_operation, cipher_operation)
+        command_result = CommandResult()
+        task_converter = TaskConverter()
+
         task.begin = time.time()
-        try:
-            for i in 1, 2, 3:
-                print('cmd', i, end=' ', flush=True)
-                time.sleep(1)
-            task.status = (0, 'Success')
-            #task.status = (1, 'File is not found')
-            task.end = time.time()
-            report = converter.task_to_report(task)
-            if task.status[0] == 0:
-                out = (self.STATUS_OK, report)
-            else:
-                out = (self.STATUS_FAILED, report)
-        except KeyboardInterrupt:
-            out = (self.STATUS_CTRLC, None)
+        src, dst = task.source, task.destination
+        if not os.path.exists(src):
+            raise SystemOperationsPathError('Can\'t find source ' + src)
+        if not os.path.exists(dst):
+            raise SystemOperationsPathError('Can\'t find destination ' + dst)
+        if os.path.isfile(src) and not os.path.isdir(dst):
+            command_result = context_commands.file_to_file(src, dst)
+        elif os.path.isfile(src) and os.path.isdir(dst):
+            command_result = context_commands.file_to_dir(src, dst)
+        elif os.path.isdir(src) and os.path.isdir(dst):
+            command_result = context_commands.dir_to_dir(src, dst)
+        else:
+            raise SystemOperationsContextError(
+                'Can\'t select context: {} to {}'.format(src, dst))
+        task.status = command_result.status
+        task.end = time.time()
+        report = task_converter.task_to_report(task)
+        if command_result.flags & command_result.F_OK:
+            out = (self.STATUS_OK, report)
+        elif command_result.flags & command_result.F_FAIL:
+            out = (self.STATUS_FAILED, report)
+        elif command_result.flags & command_result.F_SKIP:
+            out = (self.STATUS_SKIPPED, report)
+        elif command_result.flags & command_result.F_INTER:
+             out = (self.STATUS_CTRLC, None)
         return out
 
 
