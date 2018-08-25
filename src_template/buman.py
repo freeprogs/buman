@@ -635,8 +635,9 @@ class SystemOperations:
         src, dst = task.source, task.destination
         if not os.path.exists(src):
             raise SystemOperationsPathError('Can\'t find source ' + src)
-        if not os.path.exists(dst):
-            raise SystemOperationsPathError('Can\'t find destination ' + dst)
+        if not os.path.exists(os.path.dirname(dst)):
+            raise SystemOperationsPathError(
+                'Can\'t find destination directory ' + dst)
         if os.path.isfile(src) and not os.path.isdir(dst):
             command_result = context_commands.file_to_file(src, dst)
         elif os.path.isfile(src) and os.path.isdir(dst):
