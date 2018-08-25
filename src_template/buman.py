@@ -715,7 +715,10 @@ class ContextCommands:
 
     def dir_to_dir(self, src, dst):
         """."""
-        return CommandResult()
+        out = CommandResult()
+        out.flags |= CommandResult.F_OK
+        out.status = (0, 'Success')
+        return out
 
 
 class CommandResult:
