@@ -747,11 +747,11 @@ class CopyOperation:
 
     def copy_file(self, src, dst):
         """."""
-        pass
+        return (True, (0, 'Success'), None)
 
     def copy_dir(self, src, dst):
         """."""
-        pass
+        return (True, (0, 'Success'), None)
 
 
 class HashSetting:
@@ -772,11 +772,11 @@ class HashOperation:
 
     def hash_file(self, path):
         """."""
-        pass
+        return (True, (0, 'Success'), '')
 
     def hash_dir(self, path):
         """."""
-        pass
+        return (True, (0, 'Success'), '')
 
 
 class ArchiveSetting:
@@ -797,11 +797,11 @@ class ArchiveOperation:
 
     def archive_file(self, src, dst):
         """."""
-        pass
+        return (True, (0, 'Success'), None)
 
     def archive_dir(self, src, dst):
         """."""
-        pass
+        return (True, (0, 'Success'), None)
 
 
 class CipherSetting:
@@ -823,11 +823,11 @@ class CipherOperation:
 
     def encrypt_file(self, src, dst):
         """."""
-        pass
+        return (True, (0, 'Success'), None)
 
     def encrypt_dir(self, src, dst):
         """."""
-        pass
+        return (True, (0, 'Success'), None)
 
 
 class Copier:
