@@ -835,19 +835,19 @@ class Copier:
 
     def copy_file_error(self, src, dst):
         """."""
-        return True
+        return (0, 'Success')
 
     def copy_file_skip(self, src, dst):
         """."""
-        return True
+        return (0, 'Success')
 
     def copy_file_replace(self, src, dst):
         """."""
-        return True
+        return (0, 'Success')
 
     def copy_file_rotate(self, src, dst):
         """."""
-        return True
+        return (0, 'Success')
 
 
 class Hasher:
@@ -855,11 +855,11 @@ class Hasher:
 
     def hash_md5_file(self, path):
         """."""
-        return ''
+        return ((0, 'Success'), '')
 
     def hash_sha256_file(self, path):
         """."""
-        return ''
+        return ((0, 'Success'), '')
 
 
 class Archiver:
@@ -867,11 +867,11 @@ class Archiver:
 
     def archive_tar(self, src, dst):
         """."""
-        return True
+        return (0, 'Success')
 
     def archive_bz2(self, src, dst):
         """."""
-        return True
+        return (0, 'Success')
 
 
 class XorCryptor:
@@ -879,7 +879,7 @@ class XorCryptor:
 
     def encrypt_file(self, src, dst, password):
         """."""
-        return True
+        return (0, 'Success')
 
 
 class AESCryptor:
@@ -887,7 +887,7 @@ class AESCryptor:
 
     def encrypt_file(self, src, dst, password):
         """."""
-        return True
+        return (0, 'Success')
 
 
 class TaskConverter:
