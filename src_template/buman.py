@@ -673,8 +673,17 @@ class OperationsBuilder:
 
     def build_hash(self, options):
         """."""
-        HashOperation(HashSetting())
-        out = None
+        opt = [i for i in options if i.name == 'hash']
+        if opt:
+            setting = HashSetting()
+            algo = opt[0].params['algo']
+            if algo == 'md5':
+                setting.algo = HashSetting.MD5
+            elif algo == 'sha256':
+                setting.algo = HashSetting.SHA256
+            out = HashOperation(setting)
+        else:
+            out = None
         return out
 
     def build_archive(self, options):
