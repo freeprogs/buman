@@ -666,8 +666,9 @@ class OperationsBuilder:
 
     def build_copy(self, options):
         """."""
-        CopyOperation(CopySetting())
-        out = None
+        setting = CopySetting()
+        setting.mode = CopySetting.ERROR
+        out = CopyOperation(setting)
         return out
 
     def build_hash(self, options):
