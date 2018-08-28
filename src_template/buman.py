@@ -33,6 +33,7 @@ import time
 import os
 import re
 import shutil
+import subprocess
 
 
 class ConfigFileNotFound(Exception):
@@ -897,7 +898,16 @@ class Copier:
 
     def copy_file_error(self, src, dst):
         """."""
-        return (0, 'Success')
+        p = subprocess.Popen(['cp', src, dst])
+        p.wait()
+        code = p.returncode
+        if code == 0:
+            msg = 'Success'
+        else:
+            msg = ('Error cmd: cp: can\'t copy: '
+                   + src + ' to ' + dst)
+        out = (code, msg)
+        return out
 
     def copy_file_skip(self, src, dst):
         """."""
