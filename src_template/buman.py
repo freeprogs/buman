@@ -792,7 +792,15 @@ class CopyOperation:
 
     def copy_file(self, src, dst):
         """."""
-        return (True, (0, 'Success'), None)
+        copier = Copier()
+        out = (False, None, None)
+        if self.setting.mode == CopySetting.ERROR:
+            cs = copier.copy_file_error(src, dst)
+            if cs[0] == 0:
+                out = (True, cs, None)
+            else:
+                out = (False, cs, None)
+        return out
 
     def copy_dir(self, src, dst):
         """."""
