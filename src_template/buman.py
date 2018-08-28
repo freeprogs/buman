@@ -939,7 +939,15 @@ class Hasher:
 
     def hash_sha256_file(self, path):
         """."""
-        return ((0, 'Success'), '')
+        p = subprocess.Popen(['sha256sum', path], stdout=subprocess.PIPE)
+        p.wait()
+        code = p.returncode
+        if code == 0:
+            msg = 'Success'
+        else:
+            msg = 'Error'
+        text = p.stdout.read().decode('utf-8').split()[0]
+        return ((code, msg), text)
 
 
 class Archiver:
