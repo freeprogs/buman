@@ -1,0 +1,31 @@
+# This file contains examples of the config file.
+# You can copy & paste these configs for the testing purposes.
+# Also you can add new examples in the form (comment, example).
+
+
+# Example for console printing several tasks
+
+{
+    name=Rule1
+    src=/src1/file1.txt
+    src=/src2/file2.txt
+    dst=/dst1/file1.txt
+    opt=hash=md5
+}
+{
+    name=Rule2
+    src=/src1/file1.txt
+    dst=/dst1/file1.txt
+    dst=/dst2/file2.txt
+    opt=hash=sha256
+}
+
+
+# Example for low level copy and hash operations
+
+{
+    name=Rule1
+    src=/tmp/d1/file1.txt
+    dst=/tmp/d2/file1.txt.backup
+    opt=hash=md5
+}
