@@ -825,7 +825,16 @@ class HashOperation:
 
     def hash_file(self, path):
         """."""
-        return (True, (0, 'Success'), '')
+        hasher = Hasher()
+        if self.setting.algo == HashSetting.MD5:
+            s, o = hasher.hash_md5_file(path)
+        elif self.setting.algo == HashSetting.SHA256:
+            s, o = hasher.hash_sha256_file(path)
+        if s[0] == 0:
+            out = (True, s, o)
+        else:
+            out = (False, s, None)
+        return out
 
     def hash_dir(self, path):
         """."""
