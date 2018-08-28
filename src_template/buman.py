@@ -32,6 +32,7 @@ import argparse
 import time
 import os
 import re
+import shutil
 
 
 class ConfigFileNotFound(Exception):
@@ -712,8 +713,35 @@ class ContextCommands:
     def file_to_file(self, src, dst):
         """."""
         out = CommandResult()
-        out.flags |= CommandResult.F_OK
-        out.status = (0, 'Success')
+        f_hasherror = False
+
+        cb, cs, co = self.copy_operation.copy_file(src, dst)
+        if cb:
+            out.flags |= CommandResult.F_OK
+            out.status = cs
+        else:
+            out.flags |= CommandResult.F_FAIL
+            out.status = cs
+        if cb:
+            if self.hash_operation is not None:
+                hashfile = src + '.hash'
+                with open(hashfile, 'w', encoding='utf-8') as hashfout:
+                    hb, hs, ho = self.hash_operation.hash_file(src)
+                    if hb:
+                        hashtext = ho
+                        print(hashtext, file=hashfout)
+                        f_hasherror = False
+                    else:
+                        f_hasherror = True
+                shutil.move(
+                    hashfile,
+                    os.path.join(
+                        os.path.dirname(dst),
+                        os.path.basename(hashfile)))
+            if f_hasherror:
+                out.flags |= CommandResult.F_FAIL
+                out.status = hs
+
         return out
 
     def file_to_dir(self, src, dst):
