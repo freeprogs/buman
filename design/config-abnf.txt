@@ -28,7 +28,9 @@ path = 1*PATHCHAR
 
 options-list = inline-option *(":" inline-option)
 
-inline-option = hash-option / arch-option / log-option
+inline-option = copy-option / hash-option / arch-option / log-option
+
+copy-option = %s"copy" ["=" copy-value]
 
 hash-option = %s"hash" ["=" hash-value]
 
@@ -37,6 +39,8 @@ arch-option = %s"arch" ["=" arch-value]
 log-option = %s"log" ["=" log-values-list]
 
 cipher-option = %s"cipher" ["=" cipher-values-list]
+
+copy-value = %s"error" / %s"skip" / %s"replace" / %s"rotate"
 
 hash-value = %s"md5" / %s"sha256"
 
@@ -97,13 +101,14 @@ LF = %x0A
 ;     name=Name 1
 ;     src=/dir1/file1.txt
 ;     dst=/dir2/file2.txt
-;     opt=hash=md5:log=file=</dir/file.log>,level=info:arch=tar
+;     opt=copy=replace:hash=md5:log=file=</dir/file.log>,level=info:arch=tar
 ;     opt=cipher=algo=aes,password=<abcde>
 ; }
 ; {
 ;     name=Name 2
 ;     src=/dir1/file1.txt
 ;     dst=/dir2/file2.txt
+;     opt=copy=replace
 ;     opt=hash=md5
 ;     opt=log=file=</dir/file.log>
 ;     opt=log=level=info
