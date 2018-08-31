@@ -11,7 +11,8 @@
   :ARCHIVE:  tasks_archive.org::* Архив задач
   :END:
 
-** TASK Придумать формат файла настроек
+** DONE Придумать формат файла настроек
+   CLOSED: [2018-08-31 Пт 23:04]
    :PROPERTIES:
    :issue_id: 1
    :issue_type: task
