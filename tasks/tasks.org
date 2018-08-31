@@ -3,7 +3,7 @@
 #+TODO: BUG(b!) | FIXED(f) REJECT(r)
 #+PRIORITIES: A F C
 #+TAGS: current(c) testing(t)
-#+CONSTANTS: last_issue_id=5
+#+CONSTANTS: last_issue_id=6
 
 * Задачи
   :PROPERTIES:
@@ -204,3 +204,12 @@
 
    Нужно привести несколько разных примеров конфигурационного файла,
    чтобы было понятно, как его лучше писать.
+
+** TASK Создать инфраструктуру для юнит-тестов
+   :PROPERTIES:
+   :issue_id: 6
+   :issue_type: task
+   :END:
+   [2018-08-31 Пт]
+
+   Нужно добавить также анализ покрытия кода тестами.
